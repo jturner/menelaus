@@ -1,10 +1,16 @@
 ;;; This is the multidvorak layout.
 
-;; It will work for the 44-key Atreus 2 or the 42-key Atreus 1.
+;; It is written with the assumption that the host OS is set to dvorak mode, so
+;; it sends keycodes with the assumption that the OS will apply the dvorak
+;; mapping; for instance it sends [ as -, which the OS then turns back into [.
+;; There is also a "hard dvorak" layer you can activate when you plug into
+;; a computer that isn't set to dvorak in the OS.
+
+;; It will work for the 44-key Keyboardio Atreus or the 42-key Atreus Classic.
 
 (include "keycodes.scm")
 
-;; What are the rows and columns we care about?
+;; What are the rows and columns we care about? (Atreus Classic pinout)
 (define rows (list 0 1 2 3))
 (define columns (list 0 1 2 3 4 5 6 7 8 9 10))
 
@@ -35,11 +41,8 @@
 (define (set-layer n)
   (lambda (_) (set! current-layer (vector-ref layers n))))
 
-;; This will reset the board but fails to enter the bootloader for some reason.
-(define (reset _) (call-c-func "reset"))
-
-;; On the Atreus 1, we need to expose backtick on the fn layer, but on
-;; the Atreus 2 it has its own key, so we put percent there instead.
+;; On the Atreus Classic, we need to expose backtick on the fn layer, but on
+;; the Keyboardio Atreus it has its own key, so we put percent there instead.
 (define backtick-or-percent
   ;; (sft key-5)
   key-backtick)
@@ -123,7 +126,7 @@
           key-space fn key-quote key-left-bracket key-enter))
 
 (define hard-dvorak-fn-layer
-  (vector (sft key-1) (sft key-2) key-up (sft key-4) (sft key-5) (sft key-6)
+  (vector (sft key-1) (sft key-2) key-up (sft key-4) backtick-or-percent (sft key-6)
           key-page-up key-7 key-8 key-9 (sft key-backspace)
 
           (sft key-3) key-left key-down key-right (sft key-4) 0

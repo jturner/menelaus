@@ -33,10 +33,8 @@
 (define (set-layer n)
   (lambda (_) (set! current-layer (vector-ref layers n))))
 
-(define (reset _) (call-c-func "reset"))
-
-;; On the Atreus 1, we need to expose backtick on the fn layer, but on
-;; the Atreus 2 it has its own key, so we put percent there instead.
+;; On the Atreus Classic, we need to expose backtick on the fn layer, but on
+;; the Keyboardio Atreus it has its own key, so we put percent there instead.
 (define backtick-or-percent
   ;; (sft key-5)
   key-backtick)

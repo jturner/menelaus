@@ -46,10 +46,12 @@ Some linux-based systems will need a udev rule to grant permissions to
 the USB device for uploading firmware. If you get permission denied on
 `/dev/ttyACM0` or whatever it is, try running `sudo make udev`.
 
-## Known bugs
+## Limitations
 
-The reset function in the firmware has no effect; hard-reset must be
-used to flash a new firmware once this is uploaded.
+If you use dual-role keys, one-shot modifiers, or mouse keys, you may
+be happier with [QMK](https://docs.qmk.fm/) or
+[Kaleidoscope](https://github.com/keyboardio/Kaleidoscope). Likewise
+if you need more than 6 regular keys and 4 modifiers at once.
 
 ## Layout
 

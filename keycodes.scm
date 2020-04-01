@@ -105,3 +105,6 @@
 (define mod-super (modify 4))
 
 (define (sft keycode) (combo mod-shift keycode)) ; shorthand
+
+;; Enter the bootloader in preparation for flashing.
+(define (reset _) (call-c-func "reset"))

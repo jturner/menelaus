@@ -25,9 +25,16 @@
 ;; steps thru a vector/list with the initial arguments calculated by its
 ;; non-aux equivalent. The -aux function is never called directly.
 
-;; This file should be loaded by your main layout code; see qwerty.scm
+;; This file should be loaded by your main layout file; see qwerty.scm
 ;; for an example. It assumes that keycodes, layouts, and pinout have already
-;; been defined.
+;; been defined. In particular, it needs these definitions:
+
+;; * everything in keycodes.scm
+;; * momentary-layer: either false (when not active) or a vector of keycodes
+;; * current-layer: a vector of keycodes for when momentary-layer is inactive
+
+;; The keycodes in these vectors can be numbers, lists, or procedures;
+;; for details see the "Layout lookup" section below.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
