@@ -4,6 +4,9 @@ A firmware for the
 [Atreus](http://atreus.technomancy.us) keyboard, written in
 [Microscheme](https://ryansuchocki.github.io/microscheme/).
 
+This is my ([jturner](https://github.com/jturner)) personal fork of the
+codebase found on [sourcehut](https://git.sr.ht/~technomancy/menelaus).
+
 ![Atreus keyboard](atreus.jpg)
 
 See [this article about how it works](https://atreus.technomancy.us/firmware).
@@ -28,30 +31,17 @@ Requires [avrdude](https://www.nongnu.org/avrdude/) for uploading
 to the controller on the keyboard; install with your package manager
 of choice.
 
-Replace `/dev/ttyACM0` with the path your OS assigns to the USB
-bootloader of the microcontroller (on Mac OS X sometimes it is
-`/dev/cu.usbmodem1411` or similar):
+Replace `/dev/ttyU0` with the path your OS assigns to the USB
+bootloader of the microcontroller.
 
-    $ make upload USB=/dev/ttyACM0
+    $ make upload USB=/dev/ttyU0
 
 Once you run that, put the device in bootloader mode; sometimes this
 can be invoked by a key combo and sometimes a hard reset is
 necessary. On the A-star Micro used in the Atreus kits, this is done
 by shorting GND and RST twice in under a second, which causes the
 onboard LED to pulse. The Keyboardio Atreus has a reset button you can
-press with a pin to the bottom of the board. On linux-based systems
-you can monitor for the bootloader activation using `sudo dmesg --follow`.
-
-Some linux-based systems will need a udev rule to grant permissions to
-the USB device for uploading firmware. If you get permission denied on
-`/dev/ttyACM0` or whatever it is, try running `sudo make udev`.
-
-## Limitations
-
-If you use dual-role keys, one-shot modifiers, or mouse keys, you may
-be happier with [QMK](https://docs.qmk.fm/) or
-[Kaleidoscope](https://github.com/keyboardio/Kaleidoscope). Likewise
-if you need more than 6 regular keys and 4 modifiers at once.
+press with a pin to the bottom of the board.
 
 ## Layout
 
@@ -61,7 +51,7 @@ By default you get the qwerty layout. You can copy `qwerty.scm` to
 `mylayout.scm` and make changes, (you can see a list of available
 keycodes in `keycodes.scm`) then upload with:
 
-    $ make upload USB=/dev/ttyACM0 LAYOUT=mylayout
+    $ make upload USB=/dev/ttyU0 LAYOUT=mylayout
 
 There is also a `multidvorak` layout which is designed to send
 the right keycodes with the assumption that the OS is set to use
@@ -70,16 +60,6 @@ Dvorak, but it also includes layers for "hard Dvorak".
 The default layout is based on the Keyboardio Atreus, except that for
 older 42-key builds, the percent key is replaced with backtick, and
 backslash is fn+semicolon.
-
-## Development
-
-The firmware can also be run on a PC rather than on the
-microcontroller in the keyboard using `test.rkt` which loads it up
-into Racket and simulates the GPIO functions with a test harness:
-
-    $ make test
-    racket test.rkt
-    ..........................
 
 ## License
 
