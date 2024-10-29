@@ -7,6 +7,8 @@ A firmware for the
 This is my ([jturner](https://github.com/jturner)) personal fork of the
 codebase found on [sourcehut](https://git.sr.ht/~technomancy/menelaus).
 
+My forked has been moved to sourcehut: https://git.sr.ht/~jturner/menelaus
+
 ![Atreus keyboard](atreus.jpg)
 
 See [this article about how it works](https://atreus.technomancy.us/firmware).
